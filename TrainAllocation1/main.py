@@ -6,7 +6,12 @@ import openpyxl
 
 from icecream import ic
 
-path_Excel_File = "Railway services-2024.xlsx"
-df = pd.read_excel(io=path_Excel_File, engine="openpyxl")
+# Problem is most likely due to the working directory. This must be changed to os.chdir("/path/to/TrainAllocation1") with import os. 
+file_path = "Railway services-2024.xlsx"
 
-ic(df.head())
+try:
+    df = pd.read_excel(io=file_path, engine="openpyxl")
+    ic(df.head())
+
+except FileNotFoundError:
+    print(f"File '{file_path}' not found. Please check the file path.")
